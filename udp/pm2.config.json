@@ -3,7 +3,6 @@
 		{
 			"name": "speedtest-udp",
 			"script": "ping-server.js",
-			"instances": "max",
 			"autorestart": true,
 			"watch": false,
 			"time": true

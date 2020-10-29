@@ -3,7 +3,6 @@
 		{
 			"name": "speedtest-server",
 			"script": "index.js",
-			"instances": "max",
 			"autorestart": true,
 			"watch": false,
 			"time": true
