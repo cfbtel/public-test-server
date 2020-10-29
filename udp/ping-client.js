@@ -3,7 +3,7 @@ const CronJob = require("cron").CronJob;
 
 const client = dgram.createSocket("udp4");
 const HOST = "23.234.197.146";
-const PORT = 33033;
+const PORT = 3030;
 const packetSize = 32; // size of each packet in byte
 const packetsToSend = 10; // number of packets to send
 const message = new Buffer.alloc(packetSize);
