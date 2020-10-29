@@ -1,0 +1,16 @@
+{
+  "name": "udp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "pm2 start pm2.config.json",
+    "dev": "node ping-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cron": "^1.8.2"
+  }
+}
