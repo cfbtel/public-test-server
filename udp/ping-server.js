@@ -1,4 +1,4 @@
-require("dotenv")({ path: __dirname + "../.env" });
+require("dotenv").config({ path: __dirname + "../.env" });
 const dgram = require("dgram");
 
 const server = dgram.createSocket("udp4");

@@ -2,8 +2,6 @@ require("dotenv").config(".env");
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
 
 const downloadRoutes = require("./routes/v1/download");
 const uploadRoutes = require("./routes/v1/upload");
@@ -18,20 +16,6 @@ app.options("*", cors());
 
 app.use("/v1/download", downloadRoutes);
 app.use("/v1/upload", uploadRoutes);
-app.use(
-	"/v1/api-docs",
-	swaggerUi.serve,
-	(req, res, next) => {
-		if (req.query.token === process.env.DOCS_TOKEN) {
-			next();
-		} else {
-			const error = new Error("Not Authorized.");
-			error.statusCode = 403;
-			throw error;
-		}
-	},
-	swaggerUi.setup(swaggerDocument)
-);
 
 app.all("*", notFoundHandler);
 app.use(errorHandler);
