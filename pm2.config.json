@@ -1,7 +1,7 @@
 {
 	"apps": [
 		{
-			"name": "speedtest-server-canada",
+			"name": "speedtest-server",
 			"script": "index.js",
 			"instances": "max",
 			"autorestart": true,
