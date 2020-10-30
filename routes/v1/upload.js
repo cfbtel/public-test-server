@@ -26,7 +26,7 @@ const fileFiler = (req, file, cb) => {
 
 router.post(
 	"/",
-	// requireAuth,
+	requireAuth,
 	multer({ storage: fileStorage, fileFilter: fileFiler }).single("file"),
 	(req, res) => {
 		res.status(200).json({ error: false, message: "Upload finished successfully" });
