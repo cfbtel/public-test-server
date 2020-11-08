@@ -1,36 +1,27 @@
 const express = require("express");
-const multer = require("multer");
+const fileUpload = require("express-fileupload");
+
 const requireAuth = require("../../middlewares/require-auth");
 const deleteHandler = require("../../handlers/delete.handler");
 
 const router = express.Router();
 
-const fileStorage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, "uploads/");
-	},
-	filename: (req, file, cb) => {
-		cb(null, new Date().toISOString() + "-" + file.originalname);
-	},
-});
-
-const fileFiler = (req, file, cb) => {
-	if (file.mimetype === "application/zip") {
-		cb(null, true);
-	} else {
-		const error = new Error("This file is not allowed.");
-		error.statusCode = 400;
-		cb(error, false);
-	}
-};
-
 router.post(
 	"/",
 	requireAuth,
-	multer({ storage: fileStorage, fileFilter: fileFiler }).single("file"),
+	fileUpload({ useTempFiles: true, debug: false }),
 	(req, res) => {
-		res.status(200).json({ error: false, message: "Upload finished successfully" });
-		deleteHandler();
+		if (!req.files || Object.keys(req.files).length === 0) {
+			return res.status(400).send("No files were uploaded.");
+		}
+		let file = req.files.file;
+		file.mv(`${__dirname}/files/${Date.now()}.${file.name}`, (err) => {
+			if (err) {
+				return res.status(500).send(err);
+			}
+			res.json({ error: false, message: "File uploaded." });
+			deleteHandler();
+		});
 	}
 );
 
