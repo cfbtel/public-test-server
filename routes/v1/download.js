@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/:size", (req, res) => {
 	const size = req.params.size;
-	const sizeArray = ["10", "20"];
+	const sizeArray = ["5", "10", "20", "1024", "10240"];
 	if (sizeArray.includes(size)) {
 		res.status(200).download(`${dirName}/dl/${size}MB.zip`);
 	} else {
