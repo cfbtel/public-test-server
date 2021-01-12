@@ -76,6 +76,7 @@ download_test_files() {
   echo " "
   echo "Downloading sample file. Please wait until download is finished."
   echo " "
+  cd ..
   curl https://canada.trymyspeed.com/v1/download/10240 --output "$(pwd)"/dl/10240MB.zip
 }
 
