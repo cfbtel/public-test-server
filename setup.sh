@@ -71,6 +71,14 @@ start_server() {
   pm2 save
 }
 
+download_test_files() {
+  clear
+  echo " "
+  echo "Downloading sample file. Please wait until download is finished."
+  echo " "
+  curl https://canada.trymyspeed.com/v1/download/10240 --output "$(pwd)"/dl/10240MB.zip
+}
+
 welcome() {
   echo " "
   echo "#################################"
@@ -91,12 +99,14 @@ welcome() {
     setup_pm2
     setup_repo
     start_server
+    download_test_files
   else
     # node is not installed
     setup_node_npm
     setup_pm2
     setup_repo
     start_server
+    download_test_files
   fi
 }
 
